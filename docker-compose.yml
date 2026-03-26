@@ -1,0 +1,11 @@
+version: "3"
+services:
+  ss2022-panel:
+    build: .
+    container_name: ss2022-panel
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config:/app/config
+      - ./inventory.txt:/app/inventory.txt
+      - ./users.txt:/app/users.txt
