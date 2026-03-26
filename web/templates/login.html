@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head><title>登录</title></head>
+<head>
+  <title>登录</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
 <body>
   <h2>登录</h2>
   <form method="post">
-    <input type="password" name="password" placeholder="管理密码">
+    <input type="text" name="username" placeholder="账号" required><br><br>
+    <input type="password" name="password" placeholder="密码" required><br><br>
     <button type="submit">登录</button>
   </form>
 </body>
