@@ -1,15 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>登录</title>
-  <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-  <h2>登录</h2>
-  <form method="post">
-    <input type="text" name="username" placeholder="账号" required><br><br>
-    <input type="password" name="password" placeholder="密码" required><br><br>
-    <button type="submit">登录</button>
-  </form>
-</body>
-</html>
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    cfg = load_config()
+
+    # 如果未初始化，跳 setup
+    if "ADMIN_USER" not in cfg or "ADMIN_PASSWORD" not in cfg:
+        return redirect(url_for("setup"))
+
+    if request.method == "POST":
+        user = request.form["username"]
+        pwd = request.form["password"]
+
+        if user == cfg["ADMIN_USER"] and pwd == cfg["ADMIN_PASSWORD"]:
+            session["logged_in"] = True
+            return redirect(url_for("index"))
+
+        return "账号或密码错误"
+
+    return render_template("login.html")
