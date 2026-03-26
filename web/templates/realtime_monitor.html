@@ -1,0 +1,23 @@
+realtime_monitor.html<!DOCTYPE html>
+<html>
+<head>
+  <title>实时监控</title>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body>
+  <h2>实时监控日志</h2>
+  <a href="/">返回首页</a><br><br>
+  <pre id="log" style="height:500px;overflow:auto;border:1px solid #ccc;"></pre>
+  <script>
+    const socket = io();
+    const logEl = document.getElementById("log");
+    socket.on("connect", () => {
+      socket.emit("start_monitor");
+    });
+    socket.on("log", (data) => {
+      logEl.textContent += data.line + "\n";
+      logEl.scrollTop = logEl.scrollHeight;
+    });
+  </script>
+</body>
+</html>
