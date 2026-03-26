@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>用户列表</title></head>
+<body>
+  <h2>用户列表</h2>
+  <a href="/">返回首页</a> | <a href="/edit-users">编辑 users.txt</a><br><br>
+  <table border="1" cellpadding="5">
+    <tr><th>用户名</th><th>操作</th></tr>
+    {% for u in users %}
+    <tr>
+      <td>{{u.name}}</td>
+      <td><a href="/links/{{u.name}}">查看所有节点链接</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
