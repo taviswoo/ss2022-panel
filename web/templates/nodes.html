@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><title>节点列表</title></head>
+<body>
+  <h2>节点列表</h2>
+  <a href="/">返回首页</a><br><br>
+  <table border="1" cellpadding="5">
+    <tr><th>名称</th><th>IP</th><th>SSH</th><th>SS端口</th><th>操作</th></tr>
+    {% for n in nodes %}
+    <tr>
+      <td>{{n.name}}</td>
+      <td>{{n.ip}}</td>
+      <td>{{n.ssh_port}}</td>
+      <td>{{n.ss_port}}</td>
+      <td>
+        <a href="/deploy/{{n.name}}">部署</a> |
+        <a href="/restart/{{n.name}}">重启</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
