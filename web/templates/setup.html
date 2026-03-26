@@ -1,16 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head><title>初始化设置</title></head>
-<body>
-  <h2>首次使用，请填写配置</h2>
-  <form method="post">
-    <label>Telegram Bot Token:</label><br>
-    <input type="text" name="BOT_TOKEN" required><br><br>
-    <label>Telegram Chat ID:</label><br>
-    <input type="text" name="CHAT_ID" required><br><br>
-    <label>Web 管理密码:</label><br>
-    <input type="password" name="ADMIN_PASSWORD" required><br><br>
-    <button type="submit">保存</button>
-  </form>
-</body>
-</html>
+@app.route("/setup")
+def setup():
+    cfg = load_config()
+
+    # 如果已经初始化过，直接跳登录
+    if "ADMIN_USER" in cfg and "ADMIN_PASSWORD" in cfg:
+        return redirect(url_for("login"))
+
+    # 自动生成随机账号密码
+    admin_user = gen_random_string(8)
+    admin_pass = gen_random_string(16)
+
+    cfg["ADMIN_USER"] = admin_user
+    cfg["ADMIN_PASSWORD"] = admin_pass
+    save_config(cfg)
+
+    # 显示一次性账号密码
+    return render_template("setup_show_credentials.html",
+                           user=admin_user,
+                           password=admin_pass)
