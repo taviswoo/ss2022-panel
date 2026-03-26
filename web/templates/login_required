@@ -1,0 +1,10 @@
+def login_required(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        cfg = load_config()
+        if "ADMIN_USER" not in cfg or "ADMIN_PASSWORD" not in cfg:
+            return redirect(url_for("setup"))
+        if not session.get("logged_in"):
+            return redirect(url_for("login"))
+        return f(*args, **kwargs)
+    return wrapper
