@@ -1,0 +1,4 @@
+# username password
+woo     pass_woo_123
+alice   pass_alice_456
+bob     pass_bob_789
