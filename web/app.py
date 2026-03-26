@@ -149,7 +149,21 @@ def nodes():
 @login_required
 def users():
     return render_template("users.html", users=read_users())
+@app.route("/edit-nodes", methods=["GET", "POST"])
+@login_required
+def edit_nodes():
+    if request.method == "POST":
+        content = request.form["content"]
+        with open(INV_FILE, "w") as f:
+            f.write(content)
+        return redirect(url_for("nodes"))
 
+    content = ""
+    if os.path.exists(INV_FILE):
+        with open(INV_FILE) as f:
+            content = f.read()
+
+    return render_template("edit_nodes.html", content=content)
 @app.route("/edit-users", methods=["GET", "POST"])
 @login_required
 def edit_users():
