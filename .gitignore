@@ -1,0 +1,5 @@
+config/web_config.json
+inventory.txt
+users.txt
+__pycache__/
+*.log
