@@ -1,0 +1,4 @@
+# name ip ssh_port ss_port
+jp-softbank-1  1.2.3.4   22  60001
+us-lax-1       5.6.7.8   22  60001
+us-sea-1       9.9.9.9   22  60001
